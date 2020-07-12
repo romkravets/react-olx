@@ -9,6 +9,7 @@ export const Auth = {
 
   setToken(token) {
     this._token = token;
+    window.localStorage.setItem('___token', token);
   },
 
   isLoggedIn() {
