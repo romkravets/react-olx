@@ -1,8 +1,13 @@
 import React from "react";
 import s from './App.module.scss'
+import Router from "./scenes/routes";
 
 function App() {
-  return <div>Hello world</div>;
+  return (
+    <main>
+      <Router />
+    </main>
+  )
 }
 
 export default App;
