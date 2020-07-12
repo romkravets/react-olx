@@ -1,10 +1,11 @@
 import React from "react";
-import {useField} from "formik";
+import { useFormikContext } from "formik";
 
-function Submit({text, ...props}) {
+function Submit(props) {
+  const form = useFormikContext(props);
 
   return (
-    <button type="submit">{text}</button>
+    <button type="submit" onClick={form.handleSubmit}>{props.text}</button>
   )
 }
 

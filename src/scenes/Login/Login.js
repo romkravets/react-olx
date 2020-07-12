@@ -1,14 +1,17 @@
 import React from "react";
 import s from './Login.module.scss'
-import Header from "../../components/Header/Header";
-import {Route, Switch, useHistory} from "react-router-dom";
-import {routes} from "../routes";
+import { useHistory } from 'react-router';
+import { routes } from "../routes";
+import Api from 'src/api';
 import LoginForm from "./components/LoginForm";
+
 
 function Login() {
   const history = useHistory();
 
-  function onSubmit() {
+  async function onSubmit({email, password}) {
+    const res = await Api.Auth.login({email, password});
+    console.log(res.data, 'res.data');
     history.push(routes.home);
   }
   return (

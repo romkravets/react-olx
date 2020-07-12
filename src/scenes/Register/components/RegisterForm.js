@@ -1,12 +1,12 @@
 import React from "react";
-import {Formik} from 'formik';
+import { Formik } from 'formik';
 import Input from "../../../components/Form/Input/Input";
 import Submit from "../../../components/Form/Submit/Submit";
 
 
-function RegisterForm({onSubmit}) {
+function RegisterForm({ onSubmit }) {
   const formikProps = {
-    initialValue: {
+    initialValues: {
       email: '',
       fullName: '',
       password: '',
