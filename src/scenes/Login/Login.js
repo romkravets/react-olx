@@ -11,7 +11,11 @@ function Login() {
   const store = useStore();
 
   async function onSubmit({email, password}) {
+
+    //await store.auth.login.run({email, password});
+
     await store.auth.login.run({email, password});
+
     /*const res = await Api.Auth.login({email, password});
     console.log(res.data, 'res.data');*/
     history.push(routes.home);

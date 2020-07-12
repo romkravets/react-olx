@@ -1,9 +1,13 @@
 import {types, flow} from "mobx-state-tree";
 import Api from 'src/api';
 
-export const LoginStore = types.model('LoginStore', {
-  isLoading: false,
-  isError: false,
+
+export const LoginStore = types
+  .model('LoginStore', {
+    isLoading: false,
+    isError: false,
+
+
 })
   .actions(store => ({
     run: flow(function* run({email, password}) {
@@ -21,3 +25,4 @@ export const LoginStore = types.model('LoginStore', {
       })
     })
   );
+
