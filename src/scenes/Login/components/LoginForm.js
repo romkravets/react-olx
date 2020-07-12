@@ -17,8 +17,8 @@ function LoginForm({ onSubmit }) {
     <div className="App">
       <Formik {...formikProps}>
         <form>
-          <Input name="email" label="Email"/>
-          <Input name="password" label="Password"/>
+          <Input type="email" name="email" label="Email"/>
+          <Input type="password" name="password" label="Password"/>
           <Submit text="Login"/>
         </form>
       </Formik>
