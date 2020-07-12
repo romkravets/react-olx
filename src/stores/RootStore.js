@@ -1,7 +1,7 @@
 import {types} from 'mobx-state-tree';
 import {AuthStore} from "./Auth/AuthStore";
 import {ViewerStore} from './ViewerStore';
-
+import Api from 'src/api';
 export const RootStore = types
   .model('RootStore', {
     auth: types.optional(AuthStore, {}),
@@ -9,19 +9,23 @@ export const RootStore = types
   })
   .actions((store) => ({
    async bootstrap() {
-     /* try {
+     try {
       const token = window.localStorage.getItem('___token');
 
-       //ToDo: check for undefined token
+
+      if (!token) {
+        return;
+      }
 
        Api.Auth.setToken(token);
-       const res = await Api.Accaunt.getUser();
+
+       const res = await Api.Account.getUser();
 
        store.viewer.setViewer(res.data);
-
-     } cetch (err) {
-
-     }*/
+       store.auth.setIsLoggedIn(true);
+     } catch (err) {
+        console.log(err);
+     }
 
     },
   }));

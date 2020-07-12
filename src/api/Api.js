@@ -1,15 +1,18 @@
 import axios from 'axios';
 
-/*export const baseUrl = 'https://apiko-intensive-backend.herokuapp.com';
-
-axios.defaults.baseURL = baseUrl;*/
-
 export const Auth = {
   _token: null,
 
   setToken(token) {
     this._token = token;
     window.localStorage.setItem('___token', token);
+    axios.defaults.headers.common.Authorization = `Bearer ${token}`;
+  },
+
+  logout() {
+    this._token = null;
+    window.localStorage.removeItem('___token');
+    axios.defaults.headers.common.Authorization = undefined;
   },
 
   isLoggedIn() {
@@ -30,3 +33,9 @@ export const Auth = {
     });
   },
 };
+
+export const Account = {
+  getUser() {
+    return axios.get('/api/account');
+  }
+}

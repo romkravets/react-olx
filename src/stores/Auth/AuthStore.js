@@ -4,7 +4,17 @@ import Api from "../../api";
 
 export const AuthStore = types.model('AuthStore', {
   login: asyncModel(loginFlow),
-});
+  isLoggedIn: false,
+})
+  .actions((store) => ({
+    setIsLoggedIn(value) {
+      store.isLoggedIn = value;
+    },
+    logout() {
+      store.isLoggedIn = false;
+      Api.Auth.logout();
+    }
+  }))
 
 function loginFlow({email, password}) {
   return async (flow) => {
