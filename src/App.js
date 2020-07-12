@@ -2,6 +2,9 @@ import React, {useEffect, useState} from "react";
 import s from './App.module.scss'
 import Router from "./scenes/routes";
 import { Provider, createStore } from 'src/stores/createStore';
+import Header from "./components/Header/Header";
+import Main from "./scenes/Main/Main";
+import {Route} from "react-router-dom";
 
 const store = createStore();
 

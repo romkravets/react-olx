@@ -1,6 +1,6 @@
 import React from "react";
 import s from './Header.module.scss'
-import {useHistory} from "react-router-dom";
+import {useHistory, NavLink} from "react-router-dom";
 import {routes} from "../../scenes/routes";
 import {observer} from "mobx-react";
 import {useStore} from "../../stores/createStore";
@@ -26,7 +26,9 @@ const  UserInfo = observer(() => {
 
   return (
     <header className={s.container}>
-      <div className={s.left}>Marcetplace</div>
+      <div className={s.left}>
+        <NavLink to={routes.home}>Marcetplace</NavLink>
+      </div>
       <div className={s.right}>
         {store.auth.isLoggedIn ? (
           <UserInfo/>

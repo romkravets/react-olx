@@ -2,6 +2,8 @@ import React from "react";
 import { Formik } from 'formik';
 import Input from "../../../components/Form/Input/Input";
 import Submit from "../../../components/Form/Submit/Submit";
+import {NavLink} from "react-router-dom";
+import {routes} from "../../routes";
 
 
 function LoginForm({ onSubmit }) {
@@ -20,6 +22,7 @@ function LoginForm({ onSubmit }) {
           <Input type="text" name="email" label="Email"/>
           <Input type="password" name="password" label="Password"/>
           <Submit text="Login"/>
+          <p>To<NavLink to={routes.register}>Register</NavLink></p>
         </form>
       </Formik>
     </div>
