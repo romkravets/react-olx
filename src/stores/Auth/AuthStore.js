@@ -8,17 +8,8 @@ export const AuthStore = types.model('AuthStore', {
 
 function loginFlow({email, password}) {
   return async (flow) => {
-    try {
-      flow.start();
-
       const res =  await Api.Auth.login({password, email});
-
       console.log(res.data);
-
-      flow.success();
-    } catch (err) {
-      flow.error(err);
-    }
   }
 }
 
