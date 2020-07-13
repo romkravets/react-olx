@@ -4,6 +4,7 @@ import {useStore} from "../stores/createStore";
 import {observer} from "mobx-react";
 import Auth from './Auth/Auth';
 import Home from "./Home/Home";
+import Header from "../components/Header/Header";
 
 
 export const routes = {
@@ -19,8 +20,12 @@ export  const PrivateRoute = observer(({component: Component, ...props})  => {
     <Route
       {...props}
       render={ (...renderProps) =>
-      store.auth.isLoggedIn ? (<Redirect to={routes.home}/>) : (<Component {...renderProps}/>)
-    }
+      store.auth.isLoggedIn
+        ?
+          (<Redirect to={routes.home}/>)
+        :
+          (<Component {...renderProps}/>)
+        }
     />
   )
 
@@ -28,10 +33,11 @@ export  const PrivateRoute = observer(({component: Component, ...props})  => {
 function  Router() {
   return (
   <BrowserRouter>
+    <Header/>
     <Switch>
       <PrivateRoute path={routes.auth} component={Auth}/>
 
-      <Route  component={Home}/>
+      <Route path={routes.home}  component={Home}/>
     </Switch>
   </BrowserRouter>
   )
