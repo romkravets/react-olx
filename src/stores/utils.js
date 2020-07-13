@@ -1,4 +1,4 @@
-import {types} from "mobx-state-tree";
+import {applySnapshot, onSnapshot, types} from "mobx-state-tree";
 import Api from "../api";
 
 export function asyncModel(thank, auto = true) {
@@ -43,4 +43,30 @@ export function asyncModel(thank, auto = true) {
     }));
   //return model.create({});
   return types.optional(model, {});
+}
+
+export function createPersist(store) {
+  onSnapshot(store, (snapshot) => {
+    console.log(snapshot);
+    window.localStorage.setItem('___persist', JSON.stringify({
+      auth: {
+        isLoggedIn: snapshot.auth.isLoggedIn,
+      },
+      viewer: {
+        user: snapshot.viewer.user,
+      }
+    }));
+  });
+
+  function rehydrate() {
+   const snapshot =  window.localStorage.getItem('___persist');
+
+   if (snapshot) {
+      applySnapshot(store, JSON.parse(snapshot));
+    }
+  }
+
+  return {
+    rehydrate,
+  }
 }

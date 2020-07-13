@@ -1,4 +1,4 @@
-import {types} from 'mobx-state-tree';
+import {applySnapshot, types} from 'mobx-state-tree';
 import {AuthStore} from "./Auth/AuthStore";
 import {ViewerStore} from './ViewerStore';
 import Api from 'src/api';
@@ -14,7 +14,7 @@ export const RootStore = types
 
 
       if (!token) {
-        return;
+        return new Error("Unauthorized");
       }
 
        Api.Auth.setToken(token);
@@ -25,6 +25,7 @@ export const RootStore = types
        store.auth.setIsLoggedIn(true);
      } catch (err) {
         console.log(err);
+        applySnapshot({});
      }
 
     },

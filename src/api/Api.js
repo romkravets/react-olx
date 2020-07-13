@@ -5,6 +5,7 @@ export const Auth = {
 
   setToken(token) {
     this._token = token;
+
     window.localStorage.setItem('___token', token);
     axios.defaults.headers.common.Authorization = `Bearer ${token}`;
   },
