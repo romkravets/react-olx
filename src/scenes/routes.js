@@ -34,6 +34,7 @@ function  Router() {
   return (
   <BrowserRouter>
     <Header/>
+
     <Switch>
       <PrivateRoute path={routes.auth} component={Auth}/>
 

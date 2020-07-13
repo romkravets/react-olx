@@ -1,4 +1,4 @@
-import {applySnapshot, onSnapshot, types} from "mobx-state-tree";
+import {applySnapshot, getParent, onSnapshot, types, getRoot} from "mobx-state-tree";
 import Api from "../api";
 
 export function asyncModel(thank, auto = true) {
@@ -21,7 +21,7 @@ export function asyncModel(thank, auto = true) {
       },
 
       run(...args) {
-        const promise = thank(...args)(store);
+        const promise = thank(...args)(store, getParent(store), getRoot(store));
 
         if (auto) {
           return store._auto(promise);

@@ -1,11 +1,13 @@
 import {applySnapshot, types} from 'mobx-state-tree';
 import {AuthStore} from "./Auth/AuthStore";
 import {ViewerStore} from './ViewerStore';
+import { LatestProductsStore } from './Products/LatestProductsStore';
 import Api from 'src/api';
 export const RootStore = types
   .model('RootStore', {
     auth: types.optional(AuthStore, {}),
     viewer: types.optional(ViewerStore, {}),
+    latestProducts: types.optional(LatestProductsStore, {})
   })
   .actions((store) => ({
    async bootstrap() {
