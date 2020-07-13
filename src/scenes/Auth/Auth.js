@@ -1,8 +1,8 @@
 import React from "react";
 import s from './Auth.module.scss'
 import Header from "../../components/Header/Header";
-import {Route, Switch} from "react-router-dom";
-import {routes} from "../routes";
+import { Switch} from "react-router-dom";
+import {PrivateRoute, routes} from "../routes";
 import Login from "../Login/Login";
 import Register from "../Register/Register";
 
@@ -11,8 +11,8 @@ function Auth() {
     <>
     <Header/>
      <Switch>
-       <Route path={routes.login} component={Login}/>
-       <Route path={routes.register} component={Register}/>
+       <PrivateRoute path={routes.login} component={Login}/>
+       <PrivateRoute path={routes.register} component={Register}/>
      </Switch>
     </>
   )
