@@ -4,7 +4,7 @@ import {asyncModel} from "../utils";
 import Api from 'src/api';
 
 export const LatestProductsStore = types.model('LatestProductsStore.js', {
-  items: types.array(ProductModel),
+  items: types.array(types.reference(ProductModel)),
 
   fetchLatest: asyncModel(fetchLatest),
 })
@@ -15,16 +15,16 @@ export const LatestProductsStore = types.model('LatestProductsStore.js', {
   }))
 
 function fetchLatest() {
-  return async function fetchlatestFlow(flow, store, Root) {
+  return async function fetchLatestFlow(flow, store, Root) {
     const res = await Api.Products.fetchLatest();
 
-    store.setItems(res.data);
+   const ids =  res.data.map((item) => {
+      Root.entities.products.add(item.id, item);
+      return item.id;
+    })
+    store.setItems(ids);
 
   }
 }
-
-const map = new Map();
-
-map.set('', )
 
 

@@ -7,11 +7,16 @@ function ProductView() {
   const store = useStore();
 /*  const latestProducts = useStore((store) =>  store.latestProducts);*/
 
-  const latestProducts = store.latestProducts.items;
-  const item = latestProducts.find((i) => i.id === +params.productsId);
+  const product = store.entities.products.collection.get(params.productsId);
+  console.log(product, 'product');
 
-  if (item) {
-    return <div>{item.title}</div>
+  //const item = latestProducts.find((i) => i.id === +params.productsId);
+
+/*  const product = useStore((store) => store.entities.products.collection.get(params.productsId));
+  console.log(product.title);*/
+
+  if (product) {
+    return <div>{product.title}</div>
   }
 
   return <div>not found</div>
