@@ -1,6 +1,8 @@
 import React, {useEffect} from "react";
 import {observer} from "mobx-react";
 import {useStore} from "../../stores/createStore";
+import {generatePath, NavLink} from "react-router-dom";
+import {routes} from "../routes";
 
 
 const Home = observer(() => {
@@ -18,7 +20,13 @@ const Home = observer(() => {
       <div>
         <h1>Home page</h1>
         <ul>
-          {store.latestProducts.items.map(item => <li>{item.title}</li>)}
+          {store.latestProducts.items.map((item) => (
+            <li>
+              <NavLink to={generatePath(routes.product, {productsId: item.id,})}>
+                  {item.title}
+              </NavLink>
+            </li>
+            ))}
         </ul>
       </div>
   )

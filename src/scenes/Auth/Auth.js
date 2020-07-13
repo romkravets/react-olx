@@ -9,7 +9,7 @@ import Register from "../Register/Register";
 function Auth() {
   return (
     <>
-    {/*<Header/>*/}
+    <Header/>
 
      <Switch>
        <PrivateRoute path={routes.login} component={Login}/>
