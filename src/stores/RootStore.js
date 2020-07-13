@@ -14,7 +14,6 @@ export const RootStore = types
      try {
       const token = window.localStorage.getItem('___token');
 
-
       if (!token) {
         return
         //return new Error("Unauthorized");
