@@ -6,7 +6,10 @@ import {useStore} from "../../stores/createStore";
 
 const  ProductView = observer(() => {
   const { productId } = useParams();
-  const collection = useProductsCollection();
+ /* const collection = useProductsCollection();*/
+
+  const store = useStore();
+  const collection = store.entities.products;
 
 
   const product = collection.get(productId);
@@ -20,6 +23,7 @@ const  ProductView = observer(() => {
   if (collection.getProduct.isLoading) {
       return <div>Loading...</div>
   } else if (!product) {
+
       return <div>Not found</div>
   }
 
