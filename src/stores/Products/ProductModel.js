@@ -1,4 +1,7 @@
 import {types} from "mobx-state-tree";
+import {UserModel} from "../UserModel";
+import {safeReference} from "../ViewerStore";
+
 
 export const ProductModel = types.model("ProductModel", {
   id: types.identifierNumber,
@@ -11,4 +14,5 @@ export const ProductModel = types.model("ProductModel", {
   price: types.number,
   createdAt: types.string,
   updatedAt: types.string,
+  owner: types.maybe(safeReference(UserModel)),
 })

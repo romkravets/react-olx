@@ -8,6 +8,6 @@ export const UserModel = types.model('ViewerStore', {
   phone: types.maybeNull(types.string),
   createdAt: types.string,
   updatedAt: types.string,
-  email: types.string,
+  email: types.maybe(types.string),
 
 })

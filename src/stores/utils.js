@@ -47,7 +47,6 @@ export function asyncModel(thank, auto = true) {
 
 export function createPersist(store) {
   onSnapshot(store, (snapshot) => {
-    console.log(snapshot);
     window.localStorage.setItem('___persist', JSON.stringify({
       auth: {
         isLoggedIn: snapshot.auth.isLoggedIn,

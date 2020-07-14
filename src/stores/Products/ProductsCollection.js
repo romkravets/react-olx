@@ -9,9 +9,20 @@ export function  useProductsCollection() {
 }
 
 function getProduct(id) {
-  return async  function getProductFlow(flow, store) {
-    const  res = await Api.Products.getById(id);
-    store.add(res.data.id, res.data);
+  return async  function getProductFlow(flow, store, Root) {
+    try {
+      const res = await Api.Products.getById(id);
+      Root.entities.users.add(res.data.owner.id, res.data.owner);
+      store.add(res.data.id, {
+        ...res.data,
+        owner: +res.data.owner.id,
+      });
+      console.log(res.data.owner.fullName, 'res');
+    } catch (err) {
+      console.log(err);
+
+    }
+
   }
 
 }
@@ -19,19 +30,4 @@ function getProduct(id) {
 export const ProductsCollection = createCollection(ProductModel, {
   getProduct: asyncModel(getProduct),
 });
-
-/*function productById(id) {
-  return (flow, store) => {
-    if(store.get(id)) {
-      return store.get(id);
-    }
-    return async  () => {
-      const res = await Api.Products.getById(id);
-
-      store.add(res.data.id, res.data);
-    }
-  }
-
-}*/
-
 

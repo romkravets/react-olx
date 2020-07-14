@@ -2,16 +2,20 @@ import React, {useEffect} from "react";
 import {useParams} from "react-router";
 import {useProductsCollection} from "../../stores/Products/ProductsCollection";
 import {observer} from "mobx-react";
+import {useStore} from "../../stores/createStore";
 //import {withSuspense} from 'src/hocs/withSuspense';
 
 const  ProductView = observer(() => {
   const { productsId } = useParams();
   const collection = useProductsCollection();
 
+  /*const store = useStore();
+  return store.entities.products;*/
+
   const product = collection.get(productsId);
 
   useEffect(() => {
-    if(!product) {
+    if(!product || !product.owner) {
       collection.getProduct.run(productsId);
     }
   }, []);
@@ -22,7 +26,18 @@ const  ProductView = observer(() => {
     return <div>Not found</div>
   }
 
-  return <div>{product.title}</div>
+  return (
+    <div>
+      <div>
+        <h1>{product.title}</h1>
+      </div>
+      <div>
+        <h3>Owner</h3>
+        {  console.log(product, 'product')}
+        {product.owner && product.owner.fullName}
+      </div>
+    </div>
+  )
 });
 
 export default ProductView;
