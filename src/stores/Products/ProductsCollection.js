@@ -2,6 +2,7 @@ import {ProductModel} from "./ProductModel";
 import {asyncModel, createCollection} from '../utils';
 import Api from 'src/api';
 import {useStore} from "../createStore";
+import {normalize} from "normalizr";
 
 export function  useProductsCollection() {
   const store = useStore();
@@ -16,6 +17,10 @@ function getProduct(id) {
   return async function getProductFlow(flow, store, Root) {
     try {
       const res = await Api.Products.getById(id);
+
+      const { result, entities } = normalize(res.data, Product);
+
+
       Root.entities.users.add(res.data.owner.id, res.data.owner);
       console.log(res.data);
       store.add(res.data.id, {
