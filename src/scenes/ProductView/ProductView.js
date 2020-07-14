@@ -3,11 +3,11 @@ import {useParams} from "react-router";
 import {useProductsCollection} from "../../stores/Products/ProductsCollection";
 import {observer} from "mobx-react";
 import {useStore} from "../../stores/createStore";
-//import {withSuspense} from 'src/hocs/withSuspense';
 
 const  ProductView = observer(() => {
   const { productId } = useParams();
   const collection = useProductsCollection();
+
 
   const product = collection.get(productId);
 
@@ -30,28 +30,10 @@ const  ProductView = observer(() => {
       </div>
       <div>
         <h3>Owner</h3>
-        {product.owner && product.owner.fullName}
+        <p>{product.owner && product.owner.fullName}</p>
       </div>
     </div>
   )
 });
 
 export default ProductView;
-
-/*
-const ProductView = observer(() => {
-  const { productId } = useParams();
-  const collection = useProductsCollection();
-
-  const product = collection.productsById.read(productId);
-
-  return <div>{product.title}</div>
-
-});
-
-export default  withSuspense(
-  ProductView,
-  () => <div>Not found</div>,
-  () => <div>Loading...</div>
-)
-*/

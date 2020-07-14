@@ -3,6 +3,7 @@ import {asyncModel, createCollection} from '../utils';
 import Api from 'src/api';
 import {useStore} from "../createStore";
 import {normalize} from "normalizr";
+import {Product} from "../schemas";
 
 export function  useProductsCollection() {
   const store = useStore();
@@ -18,18 +19,18 @@ function getProduct(id) {
     try {
       const res = await Api.Products.getById(id);
 
-      const { result, entities } = normalize(res.data, Product);
-
-
-      Root.entities.users.add(res.data.owner.id, res.data.owner);
-      console.log(res.data);
-      store.add(res.data.id, {
-        ...res.data,
-        owner: +res.data.owner.id,
-      });
+      const { entities } = normalize(res.data, Product);
+      console.log(entities);
+      debugger;
+      Root.entities.merge(entities);
+        /*Root.entities.users.add(res.data.owner.id, res.data.owner);
+        /!*console.log( Root.entities.users.add(res));*!/
+        store.add(res.data.id, {
+          ...res.data,
+          owner: +res.data.owner.id,
+        });*/
     } catch (err) {
       console.log(err);
-
     }
 
   }
