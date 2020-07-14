@@ -8,16 +8,20 @@ export function  useProductsCollection() {
   return store.entities.products;
 }
 
+export const ProductsCollection = createCollection(ProductModel, {
+  getProduct: asyncModel(getProduct),
+});
+
 function getProduct(id) {
-  return async  function getProductFlow(flow, store, Root) {
+  return async function getProductFlow(flow, store, Root) {
     try {
       const res = await Api.Products.getById(id);
       Root.entities.users.add(res.data.owner.id, res.data.owner);
+      console.log(res.data);
       store.add(res.data.id, {
         ...res.data,
         owner: +res.data.owner.id,
       });
-      console.log(res.data.owner.fullName, 'res');
     } catch (err) {
       console.log(err);
 
@@ -26,8 +30,4 @@ function getProduct(id) {
   }
 
 }
-
-export const ProductsCollection = createCollection(ProductModel, {
-  getProduct: asyncModel(getProduct),
-});
 

@@ -11,7 +11,7 @@ export const routes = {
   login: '/auth/login',
   auth: '/auth',
   register: '/auth/register',
-  product: '/products/:productsId',
+  product: '/products/:productId',
 }
 
 export  const PrivateRoute = observer(({component: Component, ...props})  => {

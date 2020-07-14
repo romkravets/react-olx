@@ -21,8 +21,8 @@ const Home = observer(() => {
         <h1>Home page</h1>
         <ul>
           {store.latestProducts.items.map((item) => (
-            <li>
-              <NavLink to={generatePath(routes.product, {productsId: item.id,})}>
+            <li key={item.id}>
+              <NavLink to={generatePath(routes.product, {productId: item.id,})}>
                   {item.title}
               </NavLink>
             </li>

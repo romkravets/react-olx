@@ -6,4 +6,5 @@ import {UsersCollection} from "./Users/UsersCollection";
 export const EntitiesStore = types.model('EntitiesStore', {
   products: ProductsCollection,
   users: UsersCollection,
+
 })

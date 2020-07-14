@@ -6,24 +6,21 @@ import {useStore} from "../../stores/createStore";
 //import {withSuspense} from 'src/hocs/withSuspense';
 
 const  ProductView = observer(() => {
-  const { productsId } = useParams();
+  const { productId } = useParams();
   const collection = useProductsCollection();
 
-  /*const store = useStore();
-  return store.entities.products;*/
-
-  const product = collection.get(productsId);
+  const product = collection.get(productId);
 
   useEffect(() => {
     if(!product || !product.owner) {
-      collection.getProduct.run(productsId);
+      collection.getProduct.run(productId);
     }
   }, []);
 
   if (collection.getProduct.isLoading) {
-    return <div>Loading...</div>
+      return <div>Loading...</div>
   } else if (!product) {
-    return <div>Not found</div>
+      return <div>Not found</div>
   }
 
   return (
@@ -33,7 +30,6 @@ const  ProductView = observer(() => {
       </div>
       <div>
         <h3>Owner</h3>
-        {  console.log(product, 'product')}
         {product.owner && product.owner.fullName}
       </div>
     </div>
