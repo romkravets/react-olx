@@ -44,5 +44,9 @@ export const Account = {
 export const Products = {
   fetchLatest() {
     return axios.get('/api/products/latest');
+  },
+
+  getById(id) {
+    return axios.get(`/api/products/${id}`);
   }
 }

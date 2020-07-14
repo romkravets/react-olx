@@ -1,25 +1,46 @@
-import React from "react";
+import React, {useEffect} from "react";
 import {useParams} from "react-router";
-import {useStore} from "../../stores/createStore";
+import {useProductsCollection} from "../../stores/Products/ProductsCollection";
+import {observer} from "mobx-react";
+//import {withSuspense} from 'src/hocs/withSuspense';
 
-function ProductView() {
-  const params = useParams();
-  const store = useStore();
-/*  const latestProducts = useStore((store) =>  store.latestProducts);*/
+const  ProductView = observer(() => {
+  const { productsId } = useParams();
+  const collection = useProductsCollection();
 
-  const product = store.entities.products.collection.get(params.productsId);
-  console.log(product, 'product');
+  const product = collection.get(productsId);
 
-  //const item = latestProducts.find((i) => i.id === +params.productsId);
+  useEffect(() => {
+    if(!product) {
+      collection.getProduct.run(productsId);
+    }
+  }, []);
 
-/*  const product = useStore((store) => store.entities.products.collection.get(params.productsId));
-  console.log(product.title);*/
-
-  if (product) {
-    return <div>{product.title}</div>
+  if (collection.getProduct.isLoading) {
+    return <div>Loading...</div>
+  } else if (!product) {
+    return <div>Not found</div>
   }
 
-  return <div>not found</div>
-}
+  return <div>{product.title}</div>
+});
 
 export default ProductView;
+
+/*
+const ProductView = observer(() => {
+  const { productId } = useParams();
+  const collection = useProductsCollection();
+
+  const product = collection.productsById.read(productId);
+
+  return <div>{product.title}</div>
+
+});
+
+export default  withSuspense(
+  ProductView,
+  () => <div>Not found</div>,
+  () => <div>Loading...</div>
+)
+*/

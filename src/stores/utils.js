@@ -76,6 +76,12 @@ export function createCollection(ofModel, asyncModels = {}) {
     collection: types.map(ofModel),
     ...asyncModels,
   })
+    .views(store => ({
+      get(key) {
+        return store.collection.get(String(key));
+      }
+
+    }))
     .actions((store) => ({
       add(key, value) {
         store.collection.set(String(key), value);
