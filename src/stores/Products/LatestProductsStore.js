@@ -20,17 +20,17 @@ function fetchLatest() {
   return async function fetchLatestFlow(flow, store, Root) {
     const res = await Api.Products.fetchLatest();
 
-    const {result, entities} = normalize(
+ /*   const {result, entities} = normalize(
       res.data, LatestProductCollection
     );
 
-    Root.entities.merge(entities);
+    Root.entities.merge(entities);*/
 
-  /* const ids =  res.data.map((item) => {
+   const ids =  res.data.map((item) => {
       Root.entities.products.add(item.id, item);
       return item.id;
-    })*/
-    store.setItems(result);
+    })
+    store.setItems(ids);
 
   }
 }

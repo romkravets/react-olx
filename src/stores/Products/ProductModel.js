@@ -1,4 +1,4 @@
-import {types} from "mobx-state-tree";
+import {types, getRoot} from "mobx-state-tree";
 import {UserModel} from "../Users/UserModel";
 import {safeReference} from "../ViewerStore";
 
@@ -14,5 +14,18 @@ export const ProductModel = types.model("ProductModel", {
   price: types.number,
   createdAt: types.string,
   updatedAt: types.string,
+/*  owner: types.maybe(safeReference(UserModel)),*/
+
   owner: types.maybe(safeReference(UserModel)),
-});
+})
+  .preProcessSnapshot(snapshot => ({
+    ...snapshot,
+    owner: snapshot.ownerId,
+  }))
+  .actions((store) => ({
+    fetchOwner() {
+      getRoot(store).entities.users.getById.run(store.ownerId);
+
+      store.owner = store.ownerId;
+    }
+  }))

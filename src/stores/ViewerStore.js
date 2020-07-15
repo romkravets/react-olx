@@ -25,8 +25,8 @@ export const ViewerStore = types.model('ViewerStore', {
   .actions((store) => ({
       setViewer(user) {
         store.user = user;
-        console.log(user, "view Owner");
-       /* store.userModel = user;
-        store.user = +user.id;*/
+     console.log(user, "view Owner");
+        /*  store.userModel = user;
+       store.user = +user.id;*/
       },
   }));

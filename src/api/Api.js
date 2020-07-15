@@ -48,5 +48,16 @@ export const Products = {
 
   getById(id) {
     return axios.get(`/api/products/${id}`);
+  },
+
+  byUserId(id) {
+    return axios.get(`/api/users/${id}/products`);
+  }
+}
+
+
+export const Users = {
+  gerById(id) {
+    return axios.get(`/api/users/${id}`);
   }
 }

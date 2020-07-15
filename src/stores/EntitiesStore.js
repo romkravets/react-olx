@@ -8,7 +8,7 @@ export const EntitiesStore = types.model('EntitiesStore', {
   users: UsersCollection,
 
 })
-  .actions((store)=> ({
+/*  .actions((store)=> ({
     merge(entities) {
       Object.keys(entities).forEach((collectionName) => {
         const collectionEntities = entities[collectionName];
@@ -20,4 +20,4 @@ export const EntitiesStore = types.model('EntitiesStore', {
 
       })
     }
-  }))
+  }))*/

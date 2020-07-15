@@ -2,6 +2,7 @@ import {asyncModel, createCollection} from '../utils';
 import Api from 'src/api';
 import {useStore} from "../createStore";
 import {UserModel} from "./UserModel";
+import {getParent} from "mobx-state-tree";
 
 
 export function  useUsersCollection() {
@@ -10,5 +11,5 @@ export function  useUsersCollection() {
 }
 
 export const UsersCollection = createCollection(UserModel, {
-  //getProduct: asyncModel(getProduct),
+  //getById: asyncModel(getProduct),
 });
