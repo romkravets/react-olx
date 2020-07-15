@@ -4,6 +4,8 @@ import {useStore} from "../stores/createStore";
 import {observer} from "mobx-react";
 import Auth from './Auth/Auth';
 import Main from "./Main/Main";
+import NotFound from "./NotFound/NotFound";
+import Inbox from "./Inbox/Inbox";
 
 
 export const routes = {
@@ -12,33 +14,35 @@ export const routes = {
   auth: '/auth',
   register: '/auth/register',
   product: '/products/:productId',
+  inbox: '/inbox',
 }
-
-export  const PrivateRoute = observer(({component: Component, ...props})  => {
+export const PrivateRoute = observer(({component: Component, ...props})  => {
   const  store = useStore();
   return (
     <Route
       {...props}
       render={ (...renderProps) =>
-      store.auth.isLoggedIn
-        ?
+        store.auth.isLoggedIn
+          ?
           (<Redirect to={routes.home}/>)
-        :
+          :
           (<Component {...renderProps}/>)
-        }
+      }
     />
   )
-
 })
+
 function  Router() {
   return (
   <BrowserRouter>
  {/*   <Header/>*/}
 
     <Switch>
-      <PrivateRoute path={routes.auth} component={Auth}/>
+      <Route path={routes.auth} component={Auth}/>
+      <Route exact path={routes.home} component={Main} />
+      <Route  path={routes.inbox} component={Inbox} />
 
-      <Route path={routes.home}  component={Main}/>
+      <Route component={NotFound} />
     </Switch>
   </BrowserRouter>
   )

@@ -13,7 +13,7 @@ function Main() {
      <Switch>
        <Route exact path={routes.home} component={Home}/>
 
-       <Route path={routes.product} component={ProductView}/>
+       {/*<Route path={routes.product} component={ProductView}/>*/}
      </Switch>
    </>
   )

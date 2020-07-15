@@ -1,31 +1,25 @@
-import React, {useEffect, useState} from "react";
+import React, {Component} from "react";
 import s from './App.module.scss'
 import Router from "./scenes/routes";
-import { Provider, createStore } from 'src/stores/createStore';
+import Api from 'src/api';
 
-const store = createStore();
+class App extends Component{
+  constructor(props) {
+    super(props);
 
-function App() {
-/*
-  const [isLoading, setLoading] = useState(true);
-*/
-  useEffect(() => {
-      store.bootstrap().then(() => {
-        //setLoading(false);
-      });
-  }, []);
-
-/*  if (isLoading) {
-    return <div>Loading...</div>
-  }*/
-
-  return (
-    <main>
-      <Provider value={store}>
-        <Router />
-      </Provider>
-    </main>
-  )
+    Api.init();
+  }
+  render() {
+    return (
+      <main>
+        {/*  <Provider value={store}>*/}
+        <div className={s.app}>
+          <Router />
+        </div>
+        {/*   </Provider>*/}
+      </main>
+    )
+  }
 }
 
 export default App;

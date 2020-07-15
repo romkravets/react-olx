@@ -1,10 +1,14 @@
 import React from "react";
 import s from './Header.module.scss'
-import {useHistory, NavLink} from "react-router-dom";
+import {useHistory, NavLink, Link, withRouter} from "react-router-dom";
 import {routes} from "../../scenes/routes";
 import {observer} from "mobx-react";
 import {useStore} from "../../stores/createStore";
+import Login from "../../scenes/Login/Login";
+import {compose, withHandlers} from "recompose";
+import Api from 'src/api';
 
+/*
 const  UserInfo = observer(() => {
   const store = useStore();
 
@@ -15,10 +19,12 @@ const  UserInfo = observer(() => {
     </div>
   )
 })
+*/
 
- const Header = observer(() => {
-  const history = useHistory();
-    const store = useStore();
+function Header({handleLogout}) {
+    const history = useHistory();
+   /*
+       const store = useStore();*/
 
   function  navigateToLogin() {
     history.push(routes.login);
@@ -30,15 +36,24 @@ const  UserInfo = observer(() => {
         <NavLink to={routes.home}>Marcetplace</NavLink>
       </div>
       <div className={s.right}>
-        {store.auth.isLoggedIn ? (
-          <UserInfo/>
+        {Api.Auth.isLoggedIn ? (
+          <button type="button" onClick={handleLogout}>Logout</button>
         ) : (
-          <button type="button" onClick={navigateToLogin}>Login</button>
+          <Link to={routes.login}>Login</Link>
         )}
       </div>
     </header>
   );
 }
+
+const enhancer = compose(
+  withRouter,
+  withHandlers({
+    handleLogout: (props) => () => {
+      Api.Auth.logout();
+      props.history.push(routes.home);
+    }
+  })
 )
 
-export default Header;
+export default enhancer(Header);
