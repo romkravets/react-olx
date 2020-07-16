@@ -1,5 +1,5 @@
 import React from "react";
-import s from './Header.module.scss'
+import s from './Inbox.module.scss'
 import {useHistory, NavLink, Link, withRouter, Redirect} from "react-router-dom";
 import {routes} from "../../scenes/routes";
 import {compose, withHandlers} from "recompose";
@@ -22,7 +22,7 @@ function Inbox() {
   );
 }
 
-const enhancer = compose(
+/*const enhancer = compose(
   withRouter,
   withHandlers({
     handleLogout: (props) => () => {
@@ -30,6 +30,6 @@ const enhancer = compose(
       props.history.push(routes.home);
     }
   })
-)
+)*/
 
-export default enhancer(Inbox);
+export default Inbox;

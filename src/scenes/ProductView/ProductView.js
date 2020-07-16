@@ -1,3 +1,4 @@
+/*
 import React, {useEffect} from "react";
 import {useParams} from "react-router";
 import {useProductsCollection} from "../../stores/Products/ProductsCollection";
@@ -6,7 +7,7 @@ import {useStore} from "../../stores/createStore";
 
 const  ProductView = observer(() => {
   const { productId } = useParams();
- /* const collection = useProductsCollection();*/
+ /!* const collection = useProductsCollection();*!/
 
   const store = useStore();
   const collection = store.entities.products;
@@ -41,3 +42,4 @@ const  ProductView = observer(() => {
 });
 
 export default ProductView;
+*/
