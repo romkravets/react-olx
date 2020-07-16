@@ -2,33 +2,26 @@ import React from "react";
 import s from './Header.module.scss'
 import {useHistory, NavLink, Link, withRouter} from "react-router-dom";
 import {routes} from "../../scenes/routes";
-import {observer} from "mobx-react";
-import {useStore} from "../../stores/createStore";
-import Login from "../../scenes/Login/Login";
 import {compose, withHandlers} from "recompose";
 import Api from 'src/api';
 
-/*
-const  UserInfo = observer(() => {
-  const store = useStore();
+/*const  UserInfo = ({handleLogout})=> {
 
   return (
     <div>
-      {store.viewer.user.fullName}{' '}
-      <button type="button" onClick={store.auth.logout}>Logout</button>
+      {this.props.isLoading}{' '}
+      <button type="button" onClick={handleLogout}>Logout</button>
     </div>
   )
-})
-*/
+}*/
 
-function Header({handleLogout}) {
-    const history = useHistory();
-   /*
-       const store = useStore();*/
+function Header({handleLogout, isLoading}) {
+ /*   const history = useHistory();
+
 
   function  navigateToLogin() {
     history.push(routes.login);
-  }
+  }*/
 
   return (
     <header className={s.container}>
@@ -36,7 +29,9 @@ function Header({handleLogout}) {
         <NavLink to={routes.home}>Marcetplace</NavLink>
       </div>
       <div className={s.right}>
-        {Api.Auth.isLoggedIn ? (
+        {console.log(isLoading, 'isLoading')}
+        {isLoading ? (
+           /* {}*/
           <button type="button" onClick={handleLogout}>Logout</button>
         ) : (
           <Link to={routes.login}>Login</Link>
@@ -46,7 +41,7 @@ function Header({handleLogout}) {
   );
 }
 
-const enhancer = compose(
+/*const enhancer = compose(
   withRouter,
   withHandlers({
     handleLogout: (props) => () => {
@@ -54,6 +49,6 @@ const enhancer = compose(
       props.history.push(routes.home);
     }
   })
-)
+)*/
 
-export default enhancer(Header);
+export default Header;

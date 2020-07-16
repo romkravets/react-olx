@@ -1,17 +1,21 @@
 import React from "react";
-import {useField} from "formik";
+/*import {useField} from "formik";*/
 import s from './Input.module.scss';
 
-function Input({label, ...props}) {
-  const [field, meta] = useField(props);
+function Input({fields, label, onChange, name, ...props}) {
+/*  const [field, meta] = useField(props);*/
 
   return (
-    <div>
-      <label className={s.container}>
+    <div className={s.container}>
+      <label htmlFor={name}>
         {label}
-        <input {...field} {...props}/>
+        <input
+          id={name}
+          value={fields[name]}
+          onChange={(evt) => onChange(name, evt.target.value)}
+          {...props}
+        />
       </label>
-      {meta.touched && meta.error && <div>{meta.error}</div>}
     </div>
   )
 }
